@@ -2,7 +2,7 @@
   "name": "com.linxium.types-record",
   "version": "1.0.0",
   "displayName": "LXLib-Types Record",
-  "description": "",
+  "description": "This library is an efficient, safe, and IL2CPP-compatible type management system designed to improve performance by scanning and recording types during the editor phase (serializing relevant types into a JSON resource file). It is particularly useful for large Unity projects.",
   "unity": "6000.2",
   "author": {
     "name": "Linxium",
