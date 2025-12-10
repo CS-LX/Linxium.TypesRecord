@@ -1,0 +1,13 @@
+{
+  "name": "com.linxium.types-record",
+  "version": "1.0.0",
+  "displayName": "LXLib-Types Record",
+  "description": "",
+  "unity": "6000.2",
+  "author": {
+    "name": "Linxium",
+    "email": "1659404657@qq.com",
+    "url": "https://github.com/CS-LX/Linxium.TypesRecord"
+  },
+  "license": "MIT"
+}
