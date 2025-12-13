@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace TypesRecord.Implementation {
     public abstract class ImplementationsScanner<T> : ITypesScanner {
-        public string ID => nameof(T);
+        public string ID => typeof(T).Name;
         public Type[] ScanTypes(List<Type> allTypes) => allTypes.Where(x => typeof(T).IsAssignableFrom(x) && !x.IsAbstract).ToArray();
     }
 }
