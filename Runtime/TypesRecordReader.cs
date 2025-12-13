@@ -27,5 +27,15 @@ namespace TypesRecord {
         }
 
         public static Type[] GetRecordedTypes(string id) => typesRecord[id];
+
+        public static T CreateInstance<T>(string id, Type type) {
+            HashSet<Type> types = typesRecord[id].ToHashSet();
+            if (!types.Contains(type)) {
+                throw new ArgumentException($"Type {type} not found in the type record of {id}");
+            }
+            return (T)Activator.CreateInstance(type);
+        }
+
+        public static T CreateInstance<T>(string id, string type) => CreateInstance<T>(id, TypesRecordUtils.ResolveFromString(type));
     }
 }
