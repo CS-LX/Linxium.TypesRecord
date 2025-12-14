@@ -1,6 +1,6 @@
 ﻿# LXLib - Types Record
 
-[中文](#简介) | [English](#english-version)
+[中文](#简介) | [English](#Introduction)
 
 ---
 
@@ -145,7 +145,7 @@ English Version
 
 # LXLib - Types Record
 
-[中文](#简介) | [English](#english-version)
+[中文](#简介) | [English](#Introduction)
 
 ---
 
@@ -286,3 +286,4 @@ This way, you can easily select types and avoid manual entry errors.
 ## License
 
 MIT License. See [LICENSE](https://github.com/CS-LX/Linxium.TypesRecord/blob/main/LICENSE) for more details.
+
