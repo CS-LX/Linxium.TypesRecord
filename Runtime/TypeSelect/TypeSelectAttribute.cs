@@ -7,8 +7,8 @@ namespace TypesRecord.TypeSelect {
         public bool FullTypeName { get; }
         public Type BaseType { get; }
 
-        public TypeSelectAttribute(Type baseTyp, bool fullTypeName) {
-            BaseType = baseTyp;
+        public TypeSelectAttribute(Type baseType, bool fullTypeName) {
+            BaseType = baseType;
             FullTypeName = fullTypeName;
         }
     }
