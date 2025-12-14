@@ -9,8 +9,9 @@
 本库是一个高效、安全且兼容IL2CPP模式的类型管理系统，旨在通过编辑器时提前扫描并记录类型（将扫描到的符合要求的类型序列化成JSON资源文件）来提升性能，特别是在大型Unity项目中。系统的两个主要优点如下：
 
 - 提前扫描与配置文件读取：在编辑器时提前扫描类型并记录到配置文件中，避免了在玩家游玩时逐一扫描类型。游戏运行时直接读取已记录的类型数据，极大提高了性能。
-
+  
 - IL2CPP兼容性与稳健性：在IL2CPP模式下，反射和动态类型查找可能导致稳健性问题，使用JSON文件来读取类型信息，不仅避免了反射的性能损失，还能提高类型识别的稳健性，确保在IL2CPP下的更高稳定性。
+  
 
 ---
 
@@ -46,11 +47,13 @@ Unity 会自动下载并导入该包。
 ---
 
 ## 使用方式
+
 1. 定义自定义类型扫描器
 
 为了扩展类型扫描逻辑，可以创建实现`ITypeScanner`接口的类。每个扫描器将扫描特定类型集合，并记录相关类型。
 
 请记住你自定义扫描器中的ID，这是在下文获取到扫描到的类型集合的唯一凭证。
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -66,6 +69,7 @@ namespace TypesRecord {
     }
 }
 ```
+
 2. 读取类型记录
 
 在游戏运行时，你可以使用`TypesRecordReader`来读取已记录的类型信息。你只需通过ID来获取已记录的类型数组。
@@ -102,18 +106,41 @@ namespace TypesRecord {
 ![](https://github.com/CS-LX/Linxium.LXLib-Docs/blob/main/TypesRecord3.png?raw=true)
 
 ---
+
 ## 注意事项
 
 - **类型记录的更新**：每次修改类型扫描规则后，需要重新生成`TypesRecord.json`文件，以确保游戏运行时使用最新的类型信息。
-## 贡献
+  
+  ## 贡献
+  
 
 如果你发现了问题或者有任何改进建议，欢迎提交问题或PR。
+
+---
+
+## 额外小工具
+
+#### 类型选择字段
+
+`TypeSelectAttribute` 让你无需手动输入类型名。在 Unity 编辑器中，应用该属性的字符串字段会自动在输入框后面添加一个 `[Type...]` 按钮，点击按钮后可以通过窗口选择一个类型，选定后自动将类型的全名或程序集限定名填入该字段。
+
+该属性的构造函数接收两个参数：
+
+- `baseType`：指定允许选择的类型的基类或接口类型，只有继承自这个类型的类可以被选择。
+  
+- `fullTypeName`：决定将类型的 **全名**（`false`）还是 **程序集限定名**（`true`）赋值给字段。
+  
+
+通过这种方式，你可以轻松选择类型并避免手动输入错误。
+
+---
 
 ## 许可
 
 MIT License. See [LICENSE](https://github.com/CS-LX/Linxium.TypesRecord/blob/main/LICENSE) for more details.
 
 ---
+
 English Version
 
 # LXLib - Types Record
@@ -127,9 +154,9 @@ English Version
 This library is an efficient, safe, and IL2CPP-compatible type management system designed to improve performance by scanning and recording types during the editor phase (serializing relevant types into a JSON resource file). It is particularly useful for large Unity projects. The two main benefits of the system are as follows:
 
 - **Pre-scan and Configuration File Reading**: Types are pre-scanned and recorded into configuration files during the editor phase, avoiding the need to scan types during runtime. The game reads the recorded types directly during gameplay, which significantly improves performance.
-
+  
 - **IL2CPP Compatibility and Robustness**: In IL2CPP mode, reflection and dynamic type lookups may cause robustness issues. Using a JSON file to read type information avoids the performance overhead of reflection and improves type resolution reliability, ensuring better stability in IL2CPP mode.
-
+  
 
 ---
 
@@ -152,13 +179,13 @@ Add the following dependency in your Unity project's `Packages/manifest.json`:
 ### ✅ Method 2: Via Unity Package Manager UI
 
 1. Open the Unity Editor.
-
+  
 2. Go to the menu bar: **Window → Package Manager**.
-
+  
 3. Click the top-left **“+” → “Add package from git URL...”**.
-
+  
 4. Enter the following URL and confirm:
-
+  
 
 ```
 https://github.com/CS-LX/Linxium.TypesRecord.git
@@ -223,7 +250,7 @@ Click the menu option `Tools/Generate Types Record` or `Assets/Create/Generate T
 ![](https://github.com/CS-LX/Linxium.LXLib-Docs/blob/main/TypesRecord1.png?raw=true)  
 ![](https://github.com/CS-LX/Linxium.LXLib-Docs/blob/main/TypesRecord2.png?raw=true)
 
-The generated type record file will be located at `Assets/Resources/Settings/` and will be named `TypesRecord.json`.  
+The generated type record file will be located at `Assets/Resources/Settings/` and will be named `TypesRecord.json`.
 
 ![](https://github.com/CS-LX/Linxium.LXLib-Docs/blob/main/TypesRecord3.png?raw=true)
 
@@ -237,7 +264,25 @@ The generated type record file will be located at `Assets/Resources/Settings/` a
 
 If you find any issues or have suggestions for improvements, feel free to submit issues or PRs.
 
-## License
+---
 
+## Additional Tools
+
+#### Type Selection Field
+
+`TypeSelectAttribute` allows you to avoid manually typing type names. In the Unity editor, when this attribute is applied to a string field, a `[Type...]` button will automatically appear next to the input field. Clicking the button opens a window to select a type, and the selected type’s full name or assembly-qualified name will be automatically assigned to the field.
+
+The attribute’s constructor takes two parameters:
+
+- `baseType`: Specifies the base type or interface type, only classes that inherit from this type can be selected.
+  
+- `fullTypeName`: Determines whether the **full name** (`false`) or **assembly-qualified name** (`true`) of the type will be assigned to the field.
+  
+
+This way, you can easily select types and avoid manual entry errors.
+
+---
+
+## License
 
 MIT License. See [LICENSE](https://github.com/CS-LX/Linxium.TypesRecord/blob/main/LICENSE) for more details.
